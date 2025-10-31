@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import CustomInput from '@/components/CustomInput'
 import CustomButton from '@/components/CustomButton'
 import { Link, router } from 'expo-router'
+import { createUser } from '@/lib/appwrite'
 
 const SignUp = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -12,14 +13,14 @@ const SignUp = () => {
     password: ""
   })
   const submit = async () => {
-    if(!form.name || !form.email || !form.password)
+    const {email, name, password } = form
+    if(!name || !email || !password)
       return Alert.alert("Error", "Please enter valid email address or password")
 
     setIsSubmitting(true)
     try {
-        // sign up function
+        await createUser({ email, password, name })
 
-        Alert.alert("Success", "User signed in successfully")
         router.replace('/')
     } catch (error: any) {
         Alert.alert('Error', error.message)
