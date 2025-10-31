@@ -3,6 +3,8 @@ import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Slot } from 'expo-router'
 import { images } from '@/constants'
+import CustomInput from '@/components/CustomInput'
+import CustomButton from '@/components/CustomButton'
 
 export default function AuthLayout() {
   return (
@@ -12,8 +14,8 @@ export default function AuthLayout() {
           <Image source={images.loginGraphic} className='size-full rounded-b-lg' resizeMode='stretch'/>
           <Image source={images.logo} className='self-center size-48 absolute -bottom-16 z-10' />
         </View>
+        <Slot/>
       </ScrollView>
-      <Slot/>
     </KeyboardAvoidingView>
   )
 }
