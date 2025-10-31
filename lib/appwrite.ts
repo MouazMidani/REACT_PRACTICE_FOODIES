@@ -1,6 +1,6 @@
 import { CreateUserParams, SignInParams } from "@/type";
 import { Account, Avatars, Client, Databases, ID, Query } from "react-native-appwrite"
-
+import * as Sentry from "@sentry/react-native"
 export const appwriteConfig = {
     endpoint: process.env.EXPO_PUBLIC_APPWRITE_ENDPOINT!,
     platform: "com.veloxen.foodies",
@@ -38,6 +38,7 @@ export const createUser = async ({ email, password, name }: CreateUserParams) =>
             { email, name, accountId: newAccount.$id, avatar: avatarUrl }
         )
     } catch (error) {
+        Sentry.captureEvent(error)
         throw new Error(error as string)   
     }
 }
@@ -46,7 +47,8 @@ export const createUser = async ({ email, password, name }: CreateUserParams) =>
 export const signIn =  async ({email, password} : SignInParams) => {
     try {
         const session = await account.createEmailPasswordSession(email, password)
-    } catch (error) {
+    } catch (error: any) {
+        Sentry.captureEvent(error)
         throw new Error(error as string)
     }
 }
@@ -65,7 +67,8 @@ export const getCurrentUser = async () => {
         if(!currentUser) throw Error
 
         return currentUser.documents[0]
-    } catch (error) {
+    } catch (error: any) {
+        Sentry.captureEvent(error)
         throw new Error(error as string)   
     }
 }
