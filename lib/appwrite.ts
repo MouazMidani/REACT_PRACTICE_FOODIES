@@ -1,25 +1,31 @@
-import { CreateUserParams, SignInParams } from "@/type";
-import { Account, Avatars, Client, Databases, ID, Query } from "react-native-appwrite"
+import {Account, Avatars, Client, Databases, ID, Query, Storage} from "react-native-appwrite";
+import {CreateUserParams, GetMenuParams, SignInParams} from "@/type";
 import * as Sentry from "@sentry/react-native"
 export const appwriteConfig = {
     endpoint: process.env.EXPO_PUBLIC_APPWRITE_ENDPOINT!,
     platform: "com.veloxen.foodies",
     projectId: process.env.EXPO_PUBLIC_APPWRITE_PROJECT_ID!,
     databaseId: "690413b20011f94e4c7a",
-    userCollectionId: "user"
+    userCollectionId: "user",
+    categoriesCollectionId: "categories",
+    menuCollectionId: "menu",
+    customizationsCollectionId: "customizations",
+    menucustomizationsCollectionId: "menucustomizations",
+    bucketId: "69054f3f0029ba93ebe6"
 }
 
 
-export const client: any = new Client();
+export const client = new Client();
 
 client
     .setEndpoint(appwriteConfig.endpoint)
     .setProject(appwriteConfig.projectId)
     .setPlatform(appwriteConfig.platform)
 
-export const account = new Account(client)
-export const databases = new Databases(client)
-export const avatars = new Avatars(client)
+    export const account = new Account(client);
+    export const databases = new Databases(client);
+    export const storage = new Storage(client);
+    const avatars = new Avatars(client);
 
 export const createUser = async ({ email, password, name }: CreateUserParams) => {
     try {
