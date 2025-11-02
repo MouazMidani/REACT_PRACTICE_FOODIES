@@ -48,7 +48,7 @@ It is built with **React Native** and **Expo** to ensure a single codebase runs 
 ### Video Preview
 A quick look at the application flow and core features.
 
-[Foodies App Preview Video]([/ReactPractice/Foodies/Preview.mp4](https://github.com/user-attachments/assets/b63e3fad-116d-49bc-a778-539104d37351))
+[Foodies App Preview Video](https://github.com/user-attachments/assets/b63e3fad-116d-49bc-a778-539104d37351)
 
 
 ### Screenshots
